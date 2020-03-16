@@ -1,0 +1,144 @@
+#value per material
+
+SELECT DISTINCT REPLACE(Material_Name,'*',''),SUM(`Inventory_Value`) FROM inventory_new GROUP BY Material_Name ORDER BY SUM(`Inventory_Value`) DESC LIMIT 3
+
+#volume per material
+
+SELECT DISTINCT REPLACE(Material_Name,'*',''),Format(SUM(`quantity`),2) FROM inventory_new GROUP BY Material_Name ORDER BY SUM(`quantity`) DESC LIMIT 3
+
+
+#value per country
+
+SELECT `Org_Country_Name`,SUM(`Inventory_Value`) AS s FROM inventory_new GROUP BY `Org_Country_Name` ORDER BY s DESC LIMIT 3
+
+
+#volume per country
+
+SELECT `Org_Country_Name`,Format(SUM(`quantity`),2) AS s FROM inventory_new GROUP BY `Org_Country_Name` ORDER BY SUM(`quantity`) DESC LIMIT 3 
+
+
+
+****************************Sales**********************************
+
+#volume per profit center
+
+SELECT DISTINCT Profit_Center,Format(SUM(Quantity_invoiced),2) FROM sales_data_new GROUP BY Profit_Center ORDER BY SUM(Quantity_invoiced) DESC LIMIT 3
+
+#value per profit center
+
+SELECT DISTINCT Profit_Center,Format(SUM(NES),2) FROM sales_data_new GROUP BY Profit_Center ORDER BY SUM(NES) DESC LIMIT 3
+
+#value per month
+
+SELECT DISTINCT Months,Format(SUM(NES),2) FROM sales_data_new GROUP BY Months
+
+#volume per month
+
+SELECT DISTINCT Months,Format(SUM(Quantity_invoiced),2) FROM sales_data_new GROUP BY Months
+
+
+#value per product
+
+SELECT DISTINCT Product_Description,Format(SUM(NES),2) FROM sales_data_new GROUP BY Product_Description ORDER BY SUM(NES) DESC LIMIT 3
+
+#value per customer
+
+SELECT Party_Name,Format(SUM(NES),2) FROM sales_data_new GROUP BY Customer ORDER BY SUM(NES) DESC LIMIT 3
+
+#volume per customer
+
+SELECT Party_Name,Format(SUM(Quantity_invoiced),2) FROM sales_data_new GROUP BY Customer ORDER BY SUM(Quantity_invoiced) DESC LIMIT 3
+
+
+#value per billing type
+
+SELECT DISTINCT Billing_Type,Format(SUM(NES),2) FROM sales_data_new GROUP BY Billing_Type ORDER BY SUM(NES) DESC LIMIT 3
+
+#volume per billing type
+
+SELECT DISTINCT Billing_Type,Format(SUM(Quantity_invoiced),2) FROM sales_data_new GROUP BY Billing_Type ORDER BY SUM(Quantity_invoiced) DESC LIMIT 3
+
+
+
+
+*****************open orders**************************************
+
+#volume ordered by material
+SELECT Material_Name, sum(Order_Quantity) as Total_Ordered_QTY From open_orders_new WHERE Line_status='Confirmed' group by Material_Name ORDER by SUM(Order_Quantity) DESC LIMIT 5
+
+#value ordered by material
+SELECT Material_Name,Format(sum(Order_Quantity)*Base_price,2) From open_orders_new WHERE Line_status='Confirmed' group by Material_Name ORDER BY sum(Order_Quantity)*Base_price DESC LIMIT 5
+
+
+# volume issued by material
+
+SELECT Material_Name,sum(Iss_qty) From open_orders_new group by Material_Name order by SUM(Iss_qty) DESC LIMIT 5
+
+#value issued by material
+
+SELECT Material_Name, format(sum(Iss_qty)*Base_price,2) From open_orders_new group by Material_Name order by SUM(Iss_qty) DESC LIMIT 5
+
+#volume by open material
+SELECT Material_Name,sum(Open_Qty) From open_orders_new where Line_status='Confirmed' group by Material_Name order by sum(Open_Qty) DESC LIMIT 5
+
+#value by open material
+
+SELECT Material_Name,format(sum(Open_Qty)*Base_price,2) From open_orders_new where Line_status='Confirmed' group by Material_Name order by sum(Open_Qty)*Base_price DESC LIMIT 5
+
+
+#volume by issued sales orgnization
+
+SELECT sales_org,sum(Iss_qty) From open_orders_new group by sales_org order by SUM(Iss_qty) DESC
+
+#value by issued sales orgnization
+
+SELECT sales_org, format(sum(Iss_qty)*Base_price,2) From open_orders_new group by sales_org order by SUM(Iss_qty) DESC
+
+
+#volume by ordered on credit
+
+SELECT sum(Iss_qty) From open_orders_new WHERE Credit='X'
+
+#value by ordered on credit
+
+SELECT format(sum(Iss_qty)*Base_price,2) From open_orders_new WHERE Credit='X'
+
+
+
+
+What is the quantity by value of the orders placed on credit
+
+What is the total volume of the inventory present per material
+
+What is the total value of sales per Month
+
+What is the total value of the quantity issued per material
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

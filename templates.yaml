@@ -1,0 +1,5 @@
+welcome: Welcome to insight bot. How can I help you?
+
+round: Can you repeat the numbers {{ numbers|join(", ") }} backwards?
+
+reprom: Are you there ? I am still listening.
