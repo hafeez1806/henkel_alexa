@@ -1,5 +1,5 @@
 Flask==0.12.1
-Flask-Ask==0.9.8
+flask_ask==0.9.8
 gunicorn==19.6.0
 Pillow==5.2.0
 cryptography==2.1.4
