@@ -2,6 +2,6 @@ Flask==0.12.1
 Flask_Ask==0.9.7
 gunicorn==19.6.0
 Pillow==5.4.1
-cryptography==2.1.4
+cryptography==3.2
 requests==2.21.0
 Werkzeug==0.16.0
